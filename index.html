@@ -25,31 +25,32 @@
     </div>
 
     <div class="addButton">
-        <button class="addBook">+</button>
+        <button class="addBookBtn">+</button>
     </div>
 
-    <form action="database" method="post">
-        <div class="prompt">
-            <label for="title">Title:</label>
-            <input type="text" name="title" required>
-        </div>
-        <div class="prompt">
-            <label for="author">Author:</label>
-            <input type="text" name="author">
-        </div>
-        <div class="prompt">
-            <label for="pages">Pages:</label>
-            <input type="text" name="pages">
-        </div>
-        <div class="prompt">
-            <label for="img">Image:</label>
-            <input type="text" name="img">
-        </div>
-        <div class="prompt">
-            <input type="checkbox">
-            <label for="read">I read this.</label>
-        </div>
-        <button>Submit</button>
+    <form action="" method="post" class="hide" onsubmit="handleSubmit(event)">
+        <fieldset>
+            <div class="prompt">
+                <label for="bookTitle">Title:</label>
+                <input type="text" name="bookTitle" id="bookTitle" required>
+            </div>
+            <div class="prompt">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" required>
+            </div>
+            <div class="prompt">
+                <label for="pages">Number of pages:</label>
+                <input type="text" name="pages" id="pages" required>
+            </div>
+            <div class="prompt">
+                <label for="img">Image URL (optional):</label>
+                <input type="text" name="img" id="img">
+            </div>
+            <div class="prompt">
+                <label for="read"><input type="checkbox" name ="read" id="read">I read this.</label>
+            </div>
+            <button class="submitBtn">Submit</button>
+        </fieldset>
     </form>
 
     <footer class="copyright">Copyright &copy; 2022 Jinsungjun</footer>

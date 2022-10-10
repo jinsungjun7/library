@@ -1,7 +1,5 @@
 let myLibrary = [
-    new Book('B1', 'A1', '1', null, true),
-    new Book('B2', 'A2', '2', null, false),
-    new Book('B3', 'A3', '3', null, true)
+    new Book('Cracking the Coding Interview', 'Gayle Laakmann McDowell', '687', 'images/ctci.jpg' , false)
 ];
 
 function Book(title, author, pages, img, read) {
@@ -20,28 +18,43 @@ function Book(title, author, pages, img, read) {
     }
 }
 
-function addBookToLibrary() {
-    myLibrary.forEach( (book) => {
-        createCard(book);
+function resetLibrary() {
+    bookContainer.innerHTML = '';
+    let count = 0;
+    myLibrary.forEach( book => {
+        createCard(book, count)
+        count++;
     });
 }
 
-function createCard(book) {
+function addBookToLibrary(book) {
+    createCard(book, myLibrary.length-1);
+}
+
+
+function createCard(book, id) {
     const bookCard = document.createElement('div');
     bookCard.classList.add('bookCard');
+    bookCard.setAttribute('id', `${id}`)
     bookCard.style.border = ".1px solid black";
 
     const removeBtn = document.createElement('button');
+    //removeBtn.innerHTML = `<img src='images/remove.jpg' alt='trashcan icon' class='trash-icon'>`;
     removeBtn.classList.add('remove');
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                               
     const readBtn = document.createElement('button');
     readBtn.classList.add('notRead');
+    readBtn.textContent = "NR";
     if (book.read == true) {
         readBtn.classList.add('read');
+        readBtn.textContent = "R"
     }
+    readBtn.addEventListener('click', (e) => {
+
+    })
 
     const bookCover = document.createElement('img');
-    if (book.img == null) {
+    if (book.img == '') {
         bookCover.src = 'images/blankcover.jpg';
     } else {
         bookCover.src = book.img;
@@ -64,19 +77,74 @@ function createCard(book) {
     bookContentContainer.appendChild(bookInfo);
     bookCard.appendChild(bookContentContainer);
     bookContainer.appendChild(bookCard);
+
+    updateBtn(removeBtn, readBtn);
+}
+
+function toggleBtnAndForm() {
+    form.classList.toggle('hide');
+}
+
+function handleSubmit(event) {
+    event.preventDefault();
+    let newBook = new Book(document.getElementById('bookTitle').value, 
+    document.getElementById('author').value, 
+    document.getElementById('pages').value, 
+    document.getElementById('img').value, 
+    document.getElementById('read').checked);
+
+
+    
+    myLibrary.push(newBook);
+    addBookToLibrary(newBook);
+    toggleBtnAndForm();
+    cleanUpForm();
 }
 
 
+function updateBtn(removeBtn, readBtn) {
+    readBtn.addEventListener('submit', (e) => {    
+        if (readBtn.classList.contains('read')) {
+            readBtn.classList.toggle('read');
+            readBtn.textContent = "NR";
+            myLibrary[e.target.parentElement.id].read = false;
+            return;
+        }
+    
+        readBtn.classList.toggle('read');
+        readBtn.textContent = "R";
+        myLibrary[e.target.parentElement.id].read = true;
+    });
+
+    removeBtn.addEventListener('click', (e) => {
+        myLibrary.splice(Number(e.target.parentElement.id), 1);
+        bookBody.removeChild(e.target.parentElement);//.parentElement);
+        resetLibrary();
+    });
+}
+
+function cleanUpForm() {
+    document.getElementById('bookTitle').value = ''; 
+    document.getElementById('author').value = ''; 
+    document.getElementById('pages').value = ''; 
+    document.getElementById('img').value = '';
+    document.getElementById('read').checked = '';
+}
+
+const bookBody = document.querySelector('#books');
 const bookContainer = document.querySelector("#books");
-
-const btn = document.querySelector('.addBook');
-
 const form = document.querySelector('form');
+window.addEventListener('load', resetLibrary());
+const submitBtn = document.querySelector('.submitBtn');
 
-btn.addEventListener('click', (e) => {
-    btn.style.display = "none";
-    form.style.display = "block"
-})
+const addBookBtn = document.querySelector('.addBookBtn');
+addBookBtn.addEventListener('click', () => {
+    toggleBtnAndForm();
+});
+
+
+
+
 
 
 

@@ -64,13 +64,15 @@ body {
     display:grid;
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-rows: 1fr 4fr 1fr;
+	background-color: #f5f5f4;
 }
 
 header {
     grid-row: 1 / 1;
     grid-column: 2 / -1;
     display:grid;
-	grid-template-columns:4fr 1fr;    
+	grid-template-columns:4fr 1fr; 
+	padding:16px;
 }
 
 header .title {
@@ -95,27 +97,37 @@ header .menu a {
 .body {
     grid-row: 2 / 2;
     grid-column: 2 / 2;
+	padding:32px 0px;
 }
 
 #books {
 	display:grid;
-	grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
-	grid-template-rows:repeat(auto-fill, minmax(400px, 1fr));
+	grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+	grid-template-rows:repeat(auto-fill, 1fr);
 	gap:32px;
 }
 
 .body #books .bookCard {
     display:grid;
     grid-template-columns: 1fr 3fr 1fr;
-	grid-template-rows: 1fr 8fr 3fr;	
+	grid-template-rows: 1fr 4fr 3fr;
+	padding:16px;
+	border-radius:20px;
+	align-items:center;
+	justify-content:center;
+	row-gap:8px;
+
+	background-color: #818cf8;
 }
 
 .bookCard img {
-	grid-column: 2 / 2;
+	grid-column: 1 / 4;
 	grid-row: 2 / 4;
 	max-width:100%;
-	min-height:100%;
-	object-fit:cover;
+	height:100%;
+	object-fit: cover;
+	overflow:auto;
+	border-radius:10px;
 }
 
 .bookCard .contentContainer {
@@ -127,19 +139,46 @@ header .menu a {
 	padding:16px 0px;;
 }
 
-.remove {
+.contentContainer h1 {
+	font-size:2rem;
+	font-weight:600;
+	text-align:center;
+}
+
+.bookCard .remove {
 	grid-column: 1 / 1;
+	background-image: url('images/remove.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size:1.75rem;
+	
 }
 
 .notRead, .read {
 	grid-column: 3 / -1;
+	
 }
 
+.bookCard .remove, .bookCard .notRead {
+	border-radius:100px;
+	height:3rem;
+	width:3rem;
+	border: .1px solid black;
+	font-weight:600;
+	background-color:#fbbf24;
+	font-size:16px;
+}
+
+.addButton {
+	grid-row: 2 / 3;
+	grid-column: 3 / 3;
+	padding:16px;
+}
 
 .addButton button {
 	position:fixed;
-	top:86%;
-	left:91%;
+	bottom:1%;
+	right:1%;
 	width: max(6rem, 50px);
 	height: max(6rem, 50px);
 	border-radius:100%;
@@ -149,14 +188,52 @@ header .menu a {
 }
 
 form {
+	position:fixed;
+	bottom:15%;
+	right:1%;
+
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+fieldset {
+	border:.1px solid black;
+	border-radius:20px;
+	padding:16px 32px;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	background-color:black;
+}
+
+.prompt {
+	display:grid;
+	padding:8px;
+	gap:4px;
+	color:white;
+}
+
+input {
+	background-color:gray;
+}
+
+fieldset .submitBtn {
+	margin:8px;
+	width:50%;
+	height:2rem;
+}
+
+form.hide {
 	display:none;
 }
+
 
 footer {
     grid-row: 3 / -1;
     grid-column: 2 / 2;
     display:flex;
     justify-content:center;
-    padding-bottom:8px;
+    padding:16px;
     align-items:end;
 }
