@@ -128,6 +128,7 @@ header .menu a {
 	object-fit: cover;
 	overflow:auto;
 	border-radius:10px;
+	justify-self:center;
 }
 
 .bookCard .contentContainer {
@@ -151,7 +152,7 @@ header .menu a {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size:1.75rem;
-	
+	justify-self:center;
 }
 
 .notRead, .read {
@@ -167,6 +168,7 @@ header .menu a {
 	font-weight:600;
 	background-color:#fbbf24;
 	font-size:16px;
+	justify-self:center;
 }
 
 .addButton {
