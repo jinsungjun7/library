@@ -1,22 +1,26 @@
-let myLibrary = [
-    new Book('Cracking the Coding Interview', 'Gayle Laakmann McDowell', '687', 'images/ctci.jpg' , false)
-];
 
-function Book(title, author, pages, img, read) {
+class Book {
+    constructor(title, author, pages, img, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.img = img;
     this.read = read;
+    }
     
-    this.info = () => {
+    info = () => {
         return `${this.title}, ${this.author}, ${this.pages}, ${this.read}`;
     }
 
-    this.noTitleInfo = () => {
+    noTitleInfo = () => {
         return `${this.author} (${this.pages})`;
     }
 }
+
+let myLibrary = [
+    new Book('Cracking the Coding Interview', 'Gayle Laakmann McDowell', '687', 'images/ctci.jpg' , false)
+];
+
 
 function resetLibrary() {
     bookContainer.innerHTML = '';
@@ -103,7 +107,7 @@ function handleSubmit(event) {
 
 
 function updateBtn(removeBtn, readBtn) {
-    readBtn.addEventListener('submit', (e) => {    
+    readBtn.addEventListener('click', (e) => {    
         if (readBtn.classList.contains('read')) {
             readBtn.classList.toggle('read');
             readBtn.textContent = "NR";
